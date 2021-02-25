@@ -1,9 +1,14 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
+
+    /** public static void
+     *
+     */
     public static void main(String[] args)
     {
         // Create new Application
@@ -12,11 +17,14 @@ public class App
         // Connect to database
         a.connect();
 
-        //Get Employee
+        //Connect to the World db
          TheWorld emp = a.getName(55);
 
         //Display results
         a.displayWorld(emp);
+
+        ArrayList<TheWorld> worldtables = a.CountriesReport();
+        a.printWorld(worldtables);
 
         // Disconnect from database
         a.disconnect();
@@ -34,7 +42,7 @@ public class App
     {
         try
         {
-            // Load Database driver
+            // Load Database jdbc driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
@@ -43,13 +51,13 @@ public class App
             System.exit(-1);
         }
 
-        int retries = 10;
-        for (int i = 0; i < retries; ++i)
+        int reentry = 10; //Number of entries here
+        for (int i = 0; i < reentry; ++i)
         {
-            System.out.println("Connecting to database...");
+            System.out.println("Connecting to World Database...");//Output for starting connections
             try
             {
-                // Wait a bit for db to start
+                // Number of seconds before the database starts
                 Thread.sleep(30000);
 
                 //Running Locally Not in Docker
@@ -58,22 +66,20 @@ public class App
                 // Connect to database inside docker
                 //con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
 
-                //con = DriverManager.getConnection("", "root", "example");
-
-                System.out.println("Successfully connected");
+                System.out.println("Successfully connected to the World Database");
                 break;
             }
             catch (SQLException sqle)
             {
-                System.out.println("Failed to connect to database attempt " + Integer.toString(i));
+                System.out.println("Failed to connect to the world database " + Integer.toString(i)); //Failed Connection
                 System.out.println(sqle.getMessage());
             }
             catch (InterruptedException ie)
             {
-                System.out.println("Thread interrupted? Should not happen.");
+                System.out.println("Error, Connection error interrupted.");
             }
         }
-    }
+    } //end of connect
 
     /**
      * Disconnect from the MySQL database.
@@ -89,26 +95,38 @@ public class App
             }
             catch (Exception e)
             {
-                System.out.println("Error closing connection to database");
+                System.out.println("Error, lost connection to the world database");
             }
         }
-    }
+    } //end of disconnect
+
+    /**
+     * This public class TheWorld
+     *
+     *
+     */
 
     public TheWorld getName(int ID)
     {
         try
         {
-            // Create an SQL statement
+            // Create an SQL statement here
             Statement stmt = con.createStatement();
-            // Create string for SQL statement
+
+            // Create string for SQL statement here
             String strSelect =
-                    "SELECT country.Population, Continent, Region,Name "
+                    "SELECT country.Population, Continent, Region,Name, Capital "
                             + "FROM country "
                             + "WHERE Capital = " + ID;
-            // Execute SQL statement
+
+                //    "SELECT code, name,  Continent, Region, population, capital "
+                //    + "FROM country "
+               //     + "Order By population desc";
+
+            // SQL statement will execute here
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new employee if valid.
-            // Check one is returned
+
+            // Return valid here
             if (rset.next())
             {
                 TheWorld emp = new TheWorld();
@@ -116,6 +134,7 @@ public class App
                 emp.Continent = rset.getString("Continent");
                 emp.Region = rset.getString("Region");
                 emp.Name = rset.getString("Name");
+                emp.Capital = rset.getInt("Capital");
               //  emp.District = rset.getString("District");
                // emp.Name = rset.getString("Name");
                 return emp;
@@ -129,7 +148,7 @@ public class App
             System.out.println("Failed to get the world details");
             return null;
         }
-    }
+    } //end of public class Theworld
 
     public void displayWorld(TheWorld emp)
     {
@@ -139,10 +158,89 @@ public class App
                     emp.Capital + " "
                             + emp.Continent + " "
                             + emp.Region + "\n"
-                            + emp.Name + "\n");
-                           // + "Salary:" + emp.salary + "\n"
-                           // + emp.dept_name + "\n"
-                           // + "Manager: " + emp.manager + "\n");
+                            + emp.Name + "\n"
+                            + emp.Population + "\n"
+                            + emp.Code + "\n");
         }
     }
+
+    /**
+     * Prints a list of world table columns.
+     * @param worldrecords The list of columns to print.
+     */
+
+    /**
+     * #SQL Query #12
+     */
+    public ArrayList<TheWorld> CountriesReport(){
+        ArrayList<TheWorld> worldtablelist = null;
+        try {
+            Statement stmt = con.createStatement();
+
+
+            String strSelect = " SELECT city.Name, country.Name, District,city.Population, Capital, Region, Continent "
+                    + " FROM city "
+                    + " INNER JOIN country ON country.Code = city.countrycode "
+                    + " ORDER BY city.Population Desc limit 5; ";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return a valid response
+
+            // Check one is returned
+            while (rset.next()) {
+                if(worldtablelist == null){
+                    worldtablelist = new ArrayList<>();
+                }
+                TheWorld emp = new TheWorld();
+                emp.Name = rset.getString("city.Name");
+                emp.Name = rset.getString("country.Name");
+                emp.District = rset.getString("District");
+                emp.Population = rset.getInt("city.Population");
+                emp.Capital = rset.getInt("Capital");
+                emp.Continent = rset.getString("Continent");
+                emp.Region = rset.getString("Region");
+                worldtablelist.add(emp);
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the world details");
+            return worldtablelist;
+        }
+
+   StringBuilder sb = new StringBuilder();
+        for(TheWorld emp : worldtablelist){
+
+        //displayTheworld table(emp);
+    sb.append(emp + "\r\n");
+}
+
+        System.out.println("" + worldtablelist.size() + " Results of the World database");
+        return worldtablelist;
+
+    }//end of countriesreport
+
+
+    //Start of printWorld public
+    public void printWorld(ArrayList<TheWorld> worldrecords) {
+
+        // Check worldrecords is not null
+
+        if (worldrecords == null) {
+            System.out.println("No world list");
+            return;
+        }
+        // Print header
+        //String format to put the data into columns
+
+        System.out.println(String.format("%-10s %-15s %-20s %-8s %-15s %-20s", "Code", "Name", "District", "Region", "Population", "Capital"));
+
+        // Loop over all worldrecords in the list
+        for (TheWorld emp : worldrecords) {
+            String emp_string =
+                    String.format("%-10s %-15s %-20s %-8s %-15s %-20s",
+                            emp.Code, emp.Name, emp.District, emp.Capital, emp.Population, emp.Region);
+            System.out.println(emp_string);
+        }
+    }//End of printWorld public
+
 }

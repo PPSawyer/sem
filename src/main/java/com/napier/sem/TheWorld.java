@@ -1,6 +1,6 @@
 package com.napier.sem;
 /**
- * Represents an employee
+ * This class connects the columns in the world database with Strings and Ints
  */
 public class TheWorld {
     /**
@@ -88,15 +88,11 @@ public class TheWorld {
      */
     public String District;
 
-    /**
-     * City Name
-     */
-   // public String Name;
+    @Override
+    public String toString() {
+        return "" + Code + ", " + Name + ", " + Continent + ", " + Region + ", " + Population + ", " + Capital;
 
-    /**
-     * City Population
-     */
-    //public int Population;
 
+    }
 }
 
