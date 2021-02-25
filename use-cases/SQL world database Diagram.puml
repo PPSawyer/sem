@@ -1,0 +1,25 @@
+@startuml
+
+package Organisation {
+    left to right direction
+    package Employees {
+     actor "Manager" as c
+    actor "Clerk" as d
+    }
+    rectangle ProducedSQLReports {
+         usecase "Capital city population" as UC1
+        usecase "Population" as UC2
+        usecase "Top populated" as UC3
+         usecase "City population" as UC4
+        usecase "Country population" as UC5
+         usecase "Spoken language population percentage" as UC6
+    }
+}
+d --> UC4
+c --> UC1
+c --> UC2
+c --> UC3
+d --> UC5
+c --> UC6
+
+@enduml
