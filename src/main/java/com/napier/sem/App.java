@@ -64,7 +64,7 @@ public class App
                 con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
-                //con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+               // con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
 
                 System.out.println("Successfully connected to the World Database");
                 break;
@@ -134,7 +134,7 @@ public class App
                 emp.Continent = rset.getString("Continent");
                 emp.Region = rset.getString("Region");
                 emp.Name = rset.getString("Name");
-                emp.Capital = rset.getInt("Capital");
+                emp.Capital = rset.getString("Capital");
               //  emp.District = rset.getString("District");
                // emp.Name = rset.getString("Name");
                 return emp;
@@ -196,7 +196,7 @@ public class App
                 emp.Name = rset.getString("country.Name");
                 emp.District = rset.getString("District");
                 emp.Population = rset.getInt("city.Population");
-                emp.Capital = rset.getInt("Capital");
+                emp.Capital = rset.getString("Capital");
                 emp.Continent = rset.getString("Continent");
                 emp.Region = rset.getString("Region");
                 worldtablelist.add(emp);

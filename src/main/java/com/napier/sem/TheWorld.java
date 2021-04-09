@@ -6,7 +6,7 @@ public class TheWorld {
     /**
      * Country code
      */
-    public String Code;
+    public int Code;
 
     /**
      * country name
@@ -31,7 +31,7 @@ public class TheWorld {
     /**
      * Country Capital
      */
-    public int Capital;
+    public String Capital;
 
     /**
      * Country Head of State
