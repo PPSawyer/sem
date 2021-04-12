@@ -17,6 +17,88 @@ public class TestWorldApp
     {
         app = new App();
     }
+/*
+    @Test
+    void mainTest()
+    {
+        App.main();
+    }
+*/
+/*
+    @Test
+    Connection con()
+    {
+
+    }
+*/
+/*
+    @Test
+    void connectTestNull()
+    {
+        app.connect (try);
+    }
+
+*/
+    @Test
+   void connectTest()
+    {
+    app.connect();
+    }
+/*
+    @Test
+    void disconnectTestNull()
+    {
+        app.disconnect(null);
+    }
+*/
+    @Test
+    void disconnectTest()
+    {
+    app.disconnect();
+    }
+
+/*
+    @Test
+    TheWorld getNameTestNull()
+    {
+        app.TheWorld(null);
+    }
+*/
+ /*   @Test
+    TheWorld getName()
+    {
+
+    }
+*/
+    @Test
+    void displayWorldTestNull()
+    {
+        app.displayWorld(null);
+    }
+/*
+    @Test
+    void displayWorld(TheWorld emp)
+    {
+        app.displayWorld();
+    }
+*/
+ /*   @Test
+    ArrayList<TheWorld> CountriesReportTestNull()
+    {
+        app.ArrayList<TheWorld>(null);
+    }*/
+/*    @Test
+    ArrayList<TheWorld> CountriesReport()
+    {
+
+    }
+*/
+    @Test
+    void printWorldStringBuilder()
+    {
+        StringBuilder sb = new StringBuilder();
+       // for(TheWorld emp : worldtablelist);
+    }
 
     @Test
     void printWorldTestNull()
