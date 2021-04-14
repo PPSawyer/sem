@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,13 +18,28 @@ public class TestWorldApp
     {
         app = new App();
     }
-/*
+
     @Test
-    void mainTest()
+    void mainRunTest()
     {
-        App.main();
+        App a = new App();
+        a.connect();
+        TheWorld emp = a.getName(55);
+        a.displayWorld(emp);
+        ArrayList<TheWorld> worldtables = a.CountriesReport();
+        a.printWorld(worldtables);
+        a.disconnect();
     }
-*/
+
+    @Test
+    void mainFailRunningTest()
+    {
+        App a = new App();
+        TheWorld emp = a.getName(55);
+        a.displayWorld(emp);
+        ArrayList<TheWorld> worldtables = a.CountriesReport();
+        a.printWorld(worldtables);
+    }
 /*
     @Test
     Connection con()
@@ -75,29 +91,38 @@ public class TestWorldApp
     {
         app.displayWorld(null);
     }
+
+    @Test
+    void displayWorld()
+    {
+        App a = new App();
+        TheWorld emp = a.getName(55);
+        a.displayWorld(emp);
+    }
+
 /*
     @Test
-    void displayWorld(TheWorld emp)
-    {
-        app.displayWorld();
-    }
-*/
- /*   @Test
     ArrayList<TheWorld> CountriesReportTestNull()
     {
         app.ArrayList<TheWorld>(null);
-    }*/
-/*    @Test
-    ArrayList<TheWorld> CountriesReport()
-    {
-
     }
-*/
+    */
+
+    @Test
+    void CountriesReport()
+    {
+        ArrayList<TheWorld> worldtablelist = null;
+
+        //Statement stmt = con.createStatement();
+    }
+
+
+
     @Test
     void printWorldStringBuilder()
     {
         StringBuilder sb = new StringBuilder();
-       // for(TheWorld emp : worldtablelist);
+   //     for(TheWorld emp : worldtablelist);
     }
 
     @Test
