@@ -15,7 +15,20 @@ public class App
         App a = new App();
 
         // Connect to database
-        a.connect();
+    //   a.connect();
+    //    a.connect("localhost:33060");
+
+        // Connect to database
+        if (args.length < 1)
+        {
+            a.connect("localhost:33060");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
+
+        //a.connect2();
 
         //Connect to the World db
          TheWorld emp = a.getName(55);
@@ -24,6 +37,8 @@ public class App
         a.displayWorld(emp);
 
         ArrayList<TheWorld> worldtables = a.CountriesReport();
+
+        // Print World report
         a.printWorld(worldtables);
 
         // Disconnect from database
@@ -38,7 +53,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
+    public void connect(String discover)
     {
         try
         {
@@ -61,10 +76,12 @@ public class App
                 Thread.sleep(30000);
 
                 //Running Locally Not in Docker
-                con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
+          //      con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
                // con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+
+                  con = DriverManager.getConnection("jdbc:mysql://" + discover + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
 
                 System.out.println("Successfully connected to the World Database");
                 break;
@@ -81,6 +98,48 @@ public class App
         }
     } //end of connect
 
+    public void connect2()
+    {
+        try
+        {
+            // Load Database jdbc driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch (ClassNotFoundException e)
+        {
+            System.out.println("Could not load SQL driver");
+            System.exit(-1);
+        }
+
+        int reentry = 10; //Number of entries here
+        for (int i = 0; i < reentry; ++i)
+        {
+            System.out.println("Connecting to World Database...");//Output for starting connections
+            try
+            {
+                // Number of seconds before the database starts
+                Thread.sleep(30000);
+
+                //Running Locally Not in Docker
+                //      con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
+
+                // Connect to database inside docker
+                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+
+                System.out.println("Successfully connected to the World Database");
+                break;
+            }
+            catch (SQLException sqle)
+            {
+                System.out.println("Failed to connect to the world database " + Integer.toString(i)); //Failed Connection
+                System.out.println(sqle.getMessage());
+            }
+            catch (InterruptedException ie)
+            {
+                System.out.println("Error, Connection error interrupted.");
+            }
+        }
+    } //end of connect
     /**
      * Disconnect from the MySQL database.
      */
