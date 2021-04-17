@@ -4,7 +4,7 @@ sudo: false
 
 addons:
   hosts:
-    - world
+    - db
 
 services:
   - docker
@@ -26,17 +26,31 @@ jobs:
     - stage: integration tests
       jdk: oraclejdk11
       script: mvn test -Dtest=com.napier.sem.AppIntegrationTest
-    - stage: deploy
+    - stage: GitHub Release
       install: skip
       jdk: oraclejdk11
       script:
+        - echo "Deploying to GitHub Releases"
         - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
-        - docker-compose up --abort-on-container-exit
+      before_deploy:
+        # Set up git user name and tag this commit
+        - git config --local user.name "Patrick Sawyer"
+        - git config --local user.email "Patrickpsawyer@gmail.com"
+        # Create temporary tag from date and Git log.
+        - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
+        # Set tag
+        - git tag $TRAVIS_TAG
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        # Copy built JAR file.  JAR built in $TRAVIS_BUILD_DIR/
+        file: $TRAVIS_BUILD_DIR/target/seMethods-0.1.0.4-jar-with-dependencies.jar
+        skip_cleanup: true
 
 stages:
   - unit tests
   - integration tests
-  - name: deploy
+  - name: GitHub Release
     if: branch = master
 
 after_success:
