@@ -111,7 +111,7 @@ public class App
             System.exit(-1);
         }
 
-        int reentry = 10; //Number of entries here
+        int reentry = 2; //Number of entries here
         for (int i = 0; i < reentry; ++i)
         {
             System.out.println("Connecting to World Database...");//Output for starting connections
