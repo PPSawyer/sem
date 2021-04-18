@@ -15,9 +15,9 @@ public class App
         App a = new App();
 
         // Connect to database
-    //   a.connect();
+       a.connect2();
     //    a.connect("localhost:33060");
-
+/*
         // Connect to database
         if (args.length < 1)
         {
@@ -61,7 +61,7 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect(String discover)
+ /*   public void connect(String discover)
     {
         try
         {
@@ -106,6 +106,8 @@ public class App
         }
     } //end of connect
 
+
+  */
     public void connect2()
     {
         try
@@ -119,7 +121,7 @@ public class App
             System.exit(-1);
         }
 
-        int reentry = 2; //Number of entries here
+        int reentry = 10; //Number of entries here
         for (int i = 0; i < reentry; ++i)
         {
             System.out.println("Connecting to World Database...");//Output for starting connections
@@ -129,10 +131,10 @@ public class App
                 Thread.sleep(30000);
 
                 //Running Locally Not in Docker
-                      con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
+                 //     con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
-                 //con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
 
                 System.out.println("Successfully connected to the World Database");
                 break;

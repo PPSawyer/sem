@@ -23,7 +23,8 @@ public class TestWorldApp
     void mainRunTest()
     {
         App a = new App();
-        a.connect("localhost:33060");
+       // a.connect("localhost:33060");
+        a.connect2();
         TheWorld emp = a.getName(55);
         a.displayWorld(emp);
         ArrayList<TheWorld> worldtables = a.CountriesReport();
@@ -58,7 +59,8 @@ public class TestWorldApp
     @Test
    void connectTest()
     {
-    app.connect("localhost:33060");
+   // app.connect("localhost:33060");
+    app.connect2();
     }
 /*
     @Test

@@ -16,7 +16,8 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        app.connect("localhost:3306");
+      //  app.connect("localhost:3306");
+        app.connect2();
     }
 
     @Test
