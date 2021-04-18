@@ -134,7 +134,7 @@ public class App
                  //     con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
-                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+               con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
 
                 System.out.println("Successfully connected to the World Database");
                 break;
