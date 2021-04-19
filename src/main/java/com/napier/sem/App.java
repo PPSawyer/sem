@@ -131,7 +131,7 @@ public class App
                 Thread.sleep(30000);
 
                 //Running Locally Not in Docker
-                  //   con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
+               //      con = DriverManager.getConnection("jdbc:mysql://localhost:33060/world?useSSL=true", "root", "example");
 
                 // Connect to database inside docker
               con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
