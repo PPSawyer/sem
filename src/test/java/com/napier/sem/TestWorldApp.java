@@ -119,7 +119,6 @@ public class TestWorldApp
     }
 
 
-
     @Test
     void printWorldStringBuilder()
     {

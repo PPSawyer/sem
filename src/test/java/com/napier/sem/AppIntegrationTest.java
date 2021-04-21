@@ -20,14 +20,25 @@ public class AppIntegrationTest
         app.connect2();
     }
 
+/*
     @Test
     void testGetWorldDetails()
     {
-        TheWorld emp = app.getName(2);
+        TheWorld emp = app.getName(0);
         assertEquals(emp.Code, 2);
         assertEquals(emp.Name, "India");
         assertEquals(emp.District, "Shanghai");
     }
+
+ */
+    @Test
+    void CountriesReport()
+    {
+        ArrayList<TheWorld> worldtablelist = null;
+
+        //Statement stmt = con.createStatement();
+    }
+
 
 
 }

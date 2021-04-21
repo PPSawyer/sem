@@ -46,6 +46,8 @@ public class App
 
         ArrayList<TheWorld> worldtables = a.CountriesReport();
 
+      //  ArrayList<Country> countries = a.getCountries();
+
         // Print World report
         a.printWorld(worldtables);
 
