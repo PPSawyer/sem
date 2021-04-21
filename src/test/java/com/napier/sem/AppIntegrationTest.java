@@ -20,17 +20,17 @@ public class AppIntegrationTest
         app.connect2();
     }
 
-/*
+
     @Test
     void testGetWorldDetails()
     {
-        TheWorld emp = app.getName(0);
-        assertEquals(emp.Code, 2);
-        assertEquals(emp.Name, "India");
-        assertEquals(emp.District, "Shanghai");
+        TheWorld emp = app.getName(55);
+        assertEquals(emp.Code, 0);
+        assertEquals(emp.Name, "Andorra");
+        assertEquals(emp.District, null);
     }
 
- */
+
     @Test
     void CountriesReport()
     {
