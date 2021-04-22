@@ -1,6 +1,6 @@
 # Software Engineering Methods
 
-- Master Build Status [![Build Status](https://travis-ci.com/PPSawyer/sem.svg?branch=master)](https://travis-ci.com/PPSawyer/sem)
+- Master Build Status [![Build Status](https://travis-ci.com/PPSawyer/sem.svg?branch=feature)](https://travis-ci.com/PPSawyer/sem)
 - Develop Build Status [![Build Status](https://travis-ci.com/PPSawyer/sem.svg?branch=develop)](https://travis-ci.com/PPSawyer/sem)
 - Code Coverage [![codecov](https://codecov.io/gh/PPSawyer/sem/branch/master/graph/badge.svg?token=E7MWXSVHF7)](https://codecov.io/gh/PPSawyer/sem)
 - License [![LICENSE](https://img.shields.io/github/license/PPSawyer/sem.svg?style=flat-square)](https://github.com/PPSawyer/sem/blob/master/LICENSE)
