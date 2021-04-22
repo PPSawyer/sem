@@ -52,7 +52,7 @@ jobs:
 stages:
   - unit tests
   - integration tests
-  - name: GitHub Release
+  - name: GitHub Master
     if: branch = feature #Remember change this to the branch that is committed.
 
 after_success:
