@@ -2,16 +2,21 @@ package com.napier.sem;
 /**
  * This class connects the columns in the world database with Strings and Ints
  */
-public class TheWorld {
+public class TheWorld<Int> {
     /**
      * Country code
      */
-    public int Code;
+    public Int Code;
 
     /**
      * country name
      */
     public String Name;
+
+    /**
+     * country name
+     */
+    public String city;
 
     /**
      * Country continent

@@ -16,8 +16,8 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-      //  app.connect("localhost:3306");
-        app.connect2();
+        app.connect("localhost:33060");
+       // app.connect2();
     }
 
 
@@ -25,7 +25,7 @@ public class AppIntegrationTest
     void testGetWorldDetails()
     {
         TheWorld emp = app.getName(55);
-        assertEquals(emp.Code, 0);
+        assertEquals(emp.Code, null);
         assertEquals(emp.Name, "Andorra");
         assertEquals(emp.District, null);
     }
