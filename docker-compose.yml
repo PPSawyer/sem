@@ -2,13 +2,18 @@ version: '3'
 services:
   # Application Dockerfile is in same folder which is .
   app:
-    build: ""
+    build: .
+    container_name: world_app 
 
     # for debugging allows us to just repackage to get jar into docker app container
+    # Needs Removed for travis
+  #    volumes:
+  #    - .\target:/tmp
 
-  # world db sql file in the world folder
+  # db is is db folder
   db:
-    build: ""
+    build: world/.
+    container_name: world_db
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
